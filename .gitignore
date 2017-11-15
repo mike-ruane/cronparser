@@ -1,0 +1,8 @@
+.idea*
+target/
+project/boot
+logs/
+
+.history
+.DS_Store
+*~
