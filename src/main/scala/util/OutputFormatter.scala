@@ -3,12 +3,12 @@ import model.CronEvaluator
 
 object OutputFormatter {
 
-  def Header(rowLength: Int) = {
-    System.out.format(s"%16s%${rowLength + 2}s", "---------------|", "-"*(rowLength + 2))
+  def Header = {
+    System.out.format(s"%16s%100s", "---------------|", "-"*100)
     println("\n")
-    System.out.format(s"%16s%${rowLength + 2}s", "cron expression|", "cron value")
+    System.out.format(s"%16s%100s", "cron expression|", "cron value")
     println("\n")
-    System.out.format(s"%16s%${rowLength + 2}s", "---------------|", "-"*(rowLength + 2))
+    System.out.format(s"%16s%100s", "---------------|", "-"*100)
     println("\n")
   }
 
@@ -21,13 +21,13 @@ object OutputFormatter {
     println("\n")
   }
 
-  def successCronFormat(cronEvaluator: CronEvaluator, rowLength: Int) = {
-    System.out.format(s"%16s%${rowLength + 2}s", cronEvaluator.cronMeta.position + "|", cronEvaluator.fromToToList.mkString(" "))
+  def successCronFormat(cronEvaluator: CronEvaluator) = {
+    System.out.format(s"%16s%100s", cronEvaluator.cronMeta.position + "|", cronEvaluator.fromToToList.mkString(" "))
       println("\n")
   }
 
-  def errorCronFormat(cronEvaluator: CronEvaluator, rowLength: Int) = {
-    System.out.format(s"%16s%${rowLength + 2}s", cronEvaluator.cronMeta.position + "|", cronEvaluator.cronValue)
+  def errorCronFormat(cronEvaluator: CronEvaluator) = {
+    println(cronEvaluator.cronMeta.position + ": " + cronEvaluator.cronValue)
       println("\n")
   }
 

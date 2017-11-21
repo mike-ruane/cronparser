@@ -1,9 +1,6 @@
 package lib
 import model._
-import scala.util.Try
 import util.Utils._
-
-case class CronHolder(cronInt: String, cronString: String)
 
 object CronMethods {
 
@@ -12,8 +9,8 @@ object CronMethods {
   def hyphenHandler(cronValue: String, cronMeta: CronMeta) = {
     val rangeList = cronValue.split("-")
     val rangeListSize = rangeList.size - 1
-    val maybeFrom = Try(rangeList(0).toInt).toOption
-    val maybeTo = Try(rangeList(rangeListSize).toInt).toOption
+    val maybeFrom = stringToMaybeInt(rangeList(0))
+    val maybeTo = stringToMaybeInt(rangeList(rangeListSize))
     FromTo(maybeFrom, maybeTo)
   }
 
@@ -24,7 +21,7 @@ object CronMethods {
       if (s.contains("-")) {
         hyphenHandler(s, cronMeta)
       } else {
-        val maybeFrom = Try(s.toInt).toOption
+        val maybeFrom = stringToMaybeInt(s)
         FromTo(maybeFrom, maybeFrom)
       }
     }
@@ -32,7 +29,7 @@ object CronMethods {
 
  def divisorHandler(cronValue: String, cronMeta: CronMeta) = {
     val cron = cronValue.split("/").toList.reverse.head
-   val maybeIntValue = Try(cron.toInt).toOption
+   val maybeIntValue = stringToMaybeInt(cron)
    maybeIntValue match {
      case Some(i) =>
        val cronRange = cronMeta.range
@@ -60,7 +57,7 @@ object CronMethods {
       case cron if (cron contains "/") && cronMeta.divisor => CronEvaluator(cronMeta, cron, divisorHandler(cronValue, cronMeta))
       case cron if cron contains "/" => CronEvaluator(cronMeta, cron, FromTo(None, None) :: Nil)
       case cron if cron contains "*" => CronEvaluator(cronMeta, cron, starHandler(cronValue, cronMeta))
-      case cron if cron.length == 1 => CronEvaluator(cronMeta, cron, FromTo(stringToMaybeInt(cron), stringToMaybeInt(cron)) :: Nil)
+      case cron if cron.length > 0 => CronEvaluator(cronMeta, cron, FromTo(stringToMaybeInt(cron), stringToMaybeInt(cron)) :: Nil)
       case _ => CronEvaluator(cronMeta, cronValue, FromTo(None, None) :: Nil)
     }
   }
