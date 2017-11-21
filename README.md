@@ -32,5 +32,16 @@ After cloning the project, start the sbt console in the root directory of the pr
 Package the project with ```package```, copy the jar out of the target directory, make executable and run like this:
 
 ```
-
+scala cronparser '*/15 0 1,5 * * /usr/bin/find'
 ```
+Where cronparser is the name of the jar.
+
+Alternatively, create alias in bash_profile:
+ 
+ ```
+ cron-parser() {
+   scala ~/path/to/directory/cronparser "$1"
+ }
+ ```
+ 
+ and run with ```cron-parser '*/15 0 1,5 * * /usr/bin/find'```
