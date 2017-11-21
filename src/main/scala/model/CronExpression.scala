@@ -2,6 +2,8 @@ package model
 
 import lib.CronMeta
 
+case class FromTo(from: Option[Int], to: Option[Int])
+
 case class CronEvaluator(
   cronMeta: CronMeta,
   cronValue: String,
@@ -25,8 +27,5 @@ case class CronEvaluator(
       case _ => false
     }.forall(_ == true)
   }
-
-
 }
-case class FromTo(from: Option[Int], to: Option[Int])
 
