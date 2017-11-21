@@ -1,4 +1,4 @@
-#Cron Parser
+# Cron Parser
 
 A command line application to parse cron expressions and display the results in a table. It will, for example, take the following string:
 
@@ -17,7 +17,7 @@ dayOfWeek: 1 2 3 4 5
 command: /usr/bin/find
 ```
 
-##Getting Started
+## Getting Started
 Install [homebrew](https://brew.sh/) first.
 
 Install java, sbt and scala with brew.
