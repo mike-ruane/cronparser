@@ -22,12 +22,12 @@ object OutputFormatter {
   }
 
   def successCronFormat(cronEvaluator: CronEvaluator) = {
-    System.out.format(s"%16s%100s", cronEvaluator.cronMeta.position + "|", cronEvaluator.fromToToList.mkString(" "))
+    System.out.format(s"%16s%100s", cronEvaluator.cronMeta.toString + "|", cronEvaluator.fromToToList.mkString(" "))
       println("\n")
   }
 
   def errorCronFormat(cronEvaluator: CronEvaluator) = {
-    println(cronEvaluator.cronMeta.position + ": " + cronEvaluator.cronValue)
+    println(cronEvaluator.cronMeta.toString + ": " + cronEvaluator.cronValue)
       println("\n")
   }
 
